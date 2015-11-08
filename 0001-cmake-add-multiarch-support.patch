@@ -1,0 +1,44 @@
+From 05972e3adc2cdf7c37115c02f35fd4eaf2604c21 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 8 Nov 2015 12:04:33 +0100
+Subject: [PATCH 1/2] cmake: add multiarch support
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ CMakeLists.txt     | 4 ++--
+ lib/CMakeLists.txt | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 191e4a4..5b37644 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -50,8 +50,8 @@ if(NOT WIN32)
+ ############################################################
+ # set install infix for plugin installation path
+ ############################################################
+-set(ISIS_PLUGIN_INFIX lib/isis/plugins)
+-set(ISIS_FILTER_INFIX lib/isis/filter)
++set(ISIS_PLUGIN_INFIX lib${LIB_SUFFIX}/isis/plugins)
++set(ISIS_FILTER_INFIX lib${LIB_SUFFIX}/isis/filter)
+ endif(NOT WIN32)
+ 
+ ############################################################
+diff --git a/lib/CMakeLists.txt b/lib/CMakeLists.txt
+index c5d8590..0cb746c 100644
+--- a/lib/CMakeLists.txt
++++ b/lib/CMakeLists.txt
+@@ -25,8 +25,8 @@ macro( build_lib name type sources deps soversion version)
+ 	# install libraries
+ 	install (TARGETS ${name}-${type}
+ 		RUNTIME DESTINATION bin COMPONENT RuntimeLibraries
+-		LIBRARY DESTINATION lib COMPONENT RuntimeLibraries
+-		ARCHIVE DESTINATION lib COMPONENT Development
++		LIBRARY DESTINATION lib${LIB_SUFFIX} COMPONENT RuntimeLibraries
++		ARCHIVE DESTINATION lib${LIB_SUFFIX} COMPONENT Development
+ 	)
+ 	
+ 	set(${name}_lib ${name}-${type} CACHE INTERNAL "internal name for ${name}" FORCE)
+-- 
+2.6.3
+

@@ -1,0 +1,25 @@
+From b2087e956c56994d97a5acb1b37a215a6f51d51a Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 8 Nov 2015 12:09:51 +0100
+Subject: [PATCH 2/2] cmake: install ISISConfig.cmake into lib-dependent
+ location
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ lib/Core/CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/Core/CMakeLists.txt b/lib/Core/CMakeLists.txt
+index 9bce968..70a4016 100644
+--- a/lib/Core/CMakeLists.txt
++++ b/lib/Core/CMakeLists.txt
+@@ -80,5 +80,5 @@ install(FILES ${DATASTORAGE_HDR_FILES} DESTINATION include/isis/DataStorage COMP
+ configure_file(cmake/isis_corecfg.cmake.in ${CMAKE_BINARY_DIR}/ISISConfig.cmake @ONLY)
+ 
+ # install cmake configuration files
+-install(FILES ${CMAKE_BINARY_DIR}/ISISConfig.cmake DESTINATION share/isis/cmake COMPONENT Development)
++install(FILES ${CMAKE_BINARY_DIR}/ISISConfig.cmake DESTINATION lib${LIB_SUFFIX}/cmake/ISIS COMPONENT Development)
+ 
+-- 
+2.6.3
+
