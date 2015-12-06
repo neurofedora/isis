@@ -3,7 +3,7 @@
 
 Name:           isis
 Version:        0.7.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Framework to access a large variety of image processing libraries
 
 License:        GPLv3+
@@ -42,7 +42,6 @@ languages and environments.
 Summary:        Development files for %{name}
 Requires:       %{name}%{?_isa} = %{version}-%{release}
 Requires:       boost-devel%{?_isa}
-Requires:       cmake%{?_isa}
 
 %description    devel
 The %{name}-devel package contains libraries and header files for
@@ -55,7 +54,7 @@ Requires:       %{name}%{?_isa} = %{version}-%{release}
 %description    tools
 Tools for %{name}. This package includes:
 
-* isisdump - Dumps the meta data informations from an image file as seen
+* isisdump - Dumps the meta data information from an image file as seen
              by the ISIS internal data representation.
 * isisdiff - Shows the  difference between the meta information
              given by two image files A and B.
@@ -135,8 +134,10 @@ pushd build/
 popd
 
 %post -p /sbin/ldconfig
+%post adapter-qt4 -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
+%postun adapter-qt4 -p /sbin/ldconfig
 
 %files
 %license COPYING.txt
@@ -174,5 +175,10 @@ popd
 %{_includedir}/%{name}/Adapter/itk*.hpp
 
 %changelog
+* Sun Dec 06 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.7.9-1
+- Run ldconfig for adapter-qt4
+- Drop cmake requires from devel subpkg
+- Fix typo in description
+
 * Sun Nov 08 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 0.7.9-1
 - Initial package
